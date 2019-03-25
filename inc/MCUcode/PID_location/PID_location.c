@@ -14,27 +14,27 @@ struct {
 	float Output;
 	float Error_last;
 	float Error_last_last;
-}_MC8V_Location_PID_Struct;
+}_ENC_Location_PID_Struct;
 
 /*
 	º¯ÊýÃû :_MC8F_Increment_PID;
 */
-float _MC8F_Location_PID(void *MC8_PID, int error)
+float _ENC_Location_PID(void *ENC_PID, int error)
 {
-	if (MC8_PID.Kp != 0)
+	if (ENC_PID.Kp != 0)
 	{
-		MC8_PID.Output += MC8_PID.Kp*(error-MC8_PID.Error_last);
+		ENC_PID.Output += ENC_PID.Kp*(error-ENC_PID.Error_last);
 	}
-	if (MC8_PID.Ki != 0)
+	if (ENC_PID.Ki != 0)
 	{
-		MC8_PID.Output += MC8_PID.Kp*error;
+		ENC_PID.Output += ENC_PID.Kp*error;
 	}
-	if (MC8_PID.Kd != 0)
+	if (ENC_PID.Kd != 0)
 	{
-		MC8_PID.Output += MC8_PID.Kd*(error - 2*MC8_PID.Error_last + MC8_PID.Error_last_last);
+		ENC_PID.Output += ENC_PID.Kd*(error - 2*ENC_PID.Error_last + ENC_PID.Error_last_last);
 	}
-	MC8_PID.Error_last_last = MC8_PID.Error_last;
-	MC8_PID.Error_last = error;
-	return MC8_PID.Output;
+	ENC_PID.Error_last_last = ENC_PID.Error_last;
+	ENC_PID.Error_last = error;
+	return ENC_PID.Output;
 }
 
