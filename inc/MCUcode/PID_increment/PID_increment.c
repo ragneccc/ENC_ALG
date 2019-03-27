@@ -7,7 +7,8 @@
 
 /*MC8@秒创8楼*************内部函数*****/
 
-struct {
+typedef struct 
+{
 	float Kp;
 	float Ki;
 	float Kd;
@@ -25,7 +26,7 @@ float _ENC_Increment_PID(void *ENC_PID,int error)
 	float P_num,I_num,D_num;
 	if (ENC_PID.Kp != 0)
 	{
-		P_num= ENC_PID.Kp*error;
+		P_num = ENC_PID.Kp*error;
 	}
 	if (ENC_PID.Ki != 0)
 	{
@@ -34,7 +35,7 @@ float _ENC_Increment_PID(void *ENC_PID,int error)
 	}
 	if (ENC_PID.Kd != 0)
 	{
-		ENC_PID.Kd*(error - ENC_PID.D_last);
+		D_num = ENC_PID.Kd*(error - ENC_PID.D_last);
 		ENC_PID.D_last = error;
 	}
 	return P_num + I_num + D_num;
