@@ -14,6 +14,8 @@ struct {
 	float Output;
 	float Error_last;
 	float Error_last_last;
+	float outMAX;
+	float outMIN;
 }_ENC_Location_PID_Struct;
 
 /*
@@ -35,6 +37,8 @@ float _ENC_Location_PID(void *ENC_PID, int error)
 	}
 	ENC_PID.Error_last_last = ENC_PID.Error_last;
 	ENC_PID.Error_last = error;
+	if(ENC_PID.Output>ENC_PID.outMAX)ENC_PID.Output=ENC_PID.outMAX;
+	if(ENC_PID.Output<ENC_PID.outMIN)ENC_PID.Output=ENC_PID.outMIN;
 	return ENC_PID.Output;
 }
 
